@@ -8,7 +8,7 @@ title: FlySP Privacy Policy
 # FlySP — 隱私權政策 / Privacy Policy
 
 **生效日 / Effective Date:** 2026-04-18
-**最後更新 / Last Updated:** 2026-08-19
+**最後更新 / Last Updated:** 2026-09-18
 
 ---
 
@@ -29,12 +29,12 @@ FlySP（以下簡稱「本應用程式」）是一款提供 GPS 位置模擬功�
 
 #### 2.2 最愛位置（本機儲存）
 - **內容**：您自行新增或匯入的位置座標、備註、國家、時區
-- **儲存位置**：僅儲存於您裝置的本機儲存空間（`SharedPreferences`），未加密
+- **儲存位置**：您裝置的本機儲存空間（`SharedPreferences`），未加密；並會納入 Android Auto Backup 備份到您自己的 Google 帳號（見第 5 節）
 - **用途**：顯示於您的「最愛」清單
 
 #### 2.3 搜尋歷史（本機儲存）
 - **內容**：您在應用內搜尋的文字關鍵字（最多 10 筆）
-- **儲存位置**：僅儲存於本機 `SharedPreferences`
+- **儲存位置**：本機 `SharedPreferences`；同樣會納入 Android Auto Backup（見第 5 節）
 - **用途**：提供搜尋建議
 
 #### 2.4 購買資訊
@@ -76,27 +76,43 @@ FlySP（以下簡稱「本應用程式」）是一款提供 GPS 位置模擬功�
 
 ### 5. 資料儲存位置與安全
 
-- **本機儲存**：最愛、搜尋歷史、app 偏好設定
+- **本機儲存**：最愛位置、搜尋歷史、模擬紀錄、app 偏好設定（存於 `SharedPreferences`）；最愛路徑存於本機資料庫 `flysp.db`
 - **加密儲存 (Android Keystore)**：付費狀態、Google Play 購買 Token
-- **離開裝置的資料**：僅限第三方服務查詢時所需的最小資料（例如搜尋關鍵字傳給 OpenStreetMap）
+- **離開裝置的資料**：
+  - 第三方服務查詢時所需的最小資料（例如搜尋關鍵字傳給 OpenStreetMap）
+  - **Android Auto Backup（自 1.11.0 起）**：您的最愛位置、最愛路徑、分類與 app 偏好設定會由 Android 系統備份到**您自己的 Google 帳號**。備份的範圍僅限上述兩個檔案（`FlutterSharedPreferences.xml` 與 `flysp.db`）。備份由 Android 系統執行與保管，本應用程式**無法讀取**該備份的內容，我們也從未持有它。
+  - **刻意排除、不會被備份**的資料：以 Android Keystore 加密的付費狀態與購買 Token（`flutter_secure_storage`；金鑰綁定裝置，還原到新機也解不開），以及懸浮視窗採集 pin 的暫存佇列（`pin_queue.json`；中繼狀態，還原後沒有意義）。
+  - **如何關閉**：系統設定 → Google → 備份（部分機型為 設定 → 系統 → 備份），可關閉整台裝置的備份，或僅關閉本應用程式的備份。關閉後新的資料不再上傳，但既有的備份需另外刪除（見第 6 節）。
 
-解除安裝本應用程式將刪除所有本機儲存的資料。
+解除安裝本應用程式將刪除所有本機儲存的資料；但**已上傳到您 Google 帳號的備份不會隨之刪除**，它會一直保留到您自行刪除為止（刪除方式見第 6 節）。
 
 ### 6. 資料保留與刪除
 
 **我們不保留您的任何個人資料。** 本應用程式沒有後端伺服器，不需要註冊帳號，也不會將您的最愛位置、搜尋歷史、模擬紀錄或任何裝置識別碼傳送到我們持有或控制的系統。我們沒有可以保留這些資料的地方。
 
-下列資料**只存在於您的裝置上**，保留期間完全由您決定，直到您自行刪除為止：
+下列資料儲存在**您的裝置上**，保留期間完全由您決定，直到您自行刪除為止（其中多數另有一份 Android Auto Backup 備份在您自己的 Google 帳號，說明見本節後段與第 5 節）：
 
 | 資料類別 | 保留位置 | 保留期間 | 刪除方式 |
 |---------|---------|---------|---------|
-| 最愛位置、收藏路徑 | 本機 `SharedPreferences` | 直到您刪除 | App 內逐筆刪除，或解除安裝 |
+| 最愛位置 | 本機 `SharedPreferences` | 直到您刪除 | App 內逐筆刪除，或解除安裝 |
+| 收藏路徑 | 本機資料庫 `flysp.db` | 直到您刪除 | App 內逐筆刪除，或解除安裝 |
 | 搜尋歷史（最多 10 筆） | 本機 `SharedPreferences` | 直到您清除 | App 內清除搜尋歷史，或解除安裝 |
 | 模擬紀錄 | 本機 `SharedPreferences` | 直到您刪除 | App 內於模擬歷史清單刪除，或解除安裝 |
 | App 偏好設定（語言、功能開關） | 本機 `SharedPreferences` | 直到您重設 | 系統設定 → 應用程式 → FlySP → 清除資料，或解除安裝 |
 | 購買狀態與 `purchaseToken` | Android Keystore（加密） | 直到您解除安裝 | 解除安裝 |
 
-**解除安裝本應用程式會一併刪除上述全部資料。** 由於我們從未持有這些資料，刪除後我們無從復原，您也不需要向我們提出刪除請求。
+**解除安裝本應用程式會一併刪除上述全部儲存在裝置上的資料。** 由於我們從未持有這些資料，刪除後我們無從復原，您也不需要向我們提出刪除請求。
+
+**但 Google 帳號中的備份是例外。** 上表中儲存於 `SharedPreferences` 與 `flysp.db` 的項目（最愛位置、收藏路徑、分類、搜尋歷史、模擬紀錄、app 偏好設定）同時會被 Android Auto Backup 複製到您自己的 Google 帳號（見第 5 節）。這份備份**不會因為您解除安裝本應用程式而消失**——那正是它的用途：讓您換機或重裝時資料回得來。它保留在您的 Google 帳號中，直到您自行刪除；我們無法讀取，也無法代為刪除。
+
+刪除該備份的方式（皆在本應用程式之外，由您直接操作 Google）：
+
+| 目的 | 操作路徑 |
+|------|---------|
+| 刪除已存在的備份 | Google One App → 儲存空間 → 裝置備份 → 選擇該裝置 →（選擇本應用程式的資料或整份備份）→ 刪除 |
+| 停止之後再上傳 | 系統設定 → Google → 備份 → 關閉「App 資料備份」或整個備份功能 |
+
+若您希望裝置上與備份中都不留下任何資料：先於系統設定關閉備份並刪除既有備份，再解除安裝本應用程式。
 
 位置資訊（見 2.1）**不會被保留**：僅在您點擊「我的位置」時查詢一次並顯示於畫面，不寫入任何儲存空間。
 
@@ -118,6 +134,7 @@ FlySP（以下簡稱「本應用程式」）是一款提供 GPS 位置模擬功�
 - 於 app 內刪除個別最愛、清除搜尋歷史
 - 於系統設定中清除 app 資料
 - 解除安裝 app
+- 刪除您 Google 帳號中的 Android Auto Backup 備份（步驟見第 6 節）
 
 ### 9. 所需權限說明
 
@@ -162,14 +179,14 @@ By using the App, you agree to this Privacy Policy.
 - **Purpose**: To center the map on your actual position so you can pick destinations
 - **Storage**: Not uploaded. GPS is queried on-demand and displayed locally only.
 
-#### 2.2 Favorite Locations (local only)
+#### 2.2 Favorite Locations (on your device)
 - **Contents**: Coordinates, notes, country, and timezone you add or import
-- **Where stored**: Your device's local `SharedPreferences` only (unencrypted)
+- **Where stored**: Your device's local `SharedPreferences` (unencrypted); also included in Android Auto Backup to your own Google account (see Section 5)
 - **Purpose**: Display your "Favorites" list
 
-#### 2.3 Search History (local only)
+#### 2.3 Search History (on your device)
 - **Contents**: Your search keywords (up to 10 entries)
-- **Where stored**: Device-local `SharedPreferences`
+- **Where stored**: Device-local `SharedPreferences`; also included in Android Auto Backup (see Section 5)
 - **Purpose**: Provide search suggestions
 
 #### 2.4 Purchase Information
@@ -211,27 +228,43 @@ By using the App, you agree to this Privacy Policy.
 
 ### 5. Data Storage & Security
 
-- **Local storage**: favorites, search history, app preferences
+- **Local storage**: favorite locations, search history, simulation records and app preferences (in `SharedPreferences`); saved routes in a local database, `flysp.db`
 - **Encrypted storage (Android Keystore)**: purchase status and Google Play purchase token
-- **Data leaving the device**: only the minimum required to query third-party services (e.g. search keywords sent to OpenStreetMap)
+- **Data leaving the device**:
+  - The minimum required to query third-party services (e.g. search keywords sent to OpenStreetMap)
+  - **Android Auto Backup (since 1.11.0)**: your favorite locations, saved routes, categories and app preferences are backed up by the Android system to **your own Google account**. The backup covers only those two files (`FlutterSharedPreferences.xml` and `flysp.db`). The backup is performed and held by Android; the App **cannot read** its contents, and we never hold it.
+  - **Deliberately excluded from the backup**: purchase status and purchase token held in Android Keystore (`flutter_secure_storage` — the key is device-bound and would not be decryptable after a restore), and the floating-window pin collection queue (`pin_queue.json` — transient state that means nothing once restored).
+  - **How to turn it off**: system Settings → Google → Backup (on some devices, Settings → System → Backup). You can disable backup for the whole device or for this app only. Turning it off stops further uploads; an existing backup must be deleted separately (see Section 6).
 
-Uninstalling the App deletes all locally-stored data.
+Uninstalling the App deletes all locally-stored data; however, **a backup already uploaded to your Google account is not deleted with it**. It remains until you delete it yourself (see Section 6).
 
 ### 6. Data Retention and Deletion
 
 **We do not retain any of your personal data.** The App has no backend server, requires no account, and does not transmit your favorites, search history, simulation records, or any device identifier to any system we own or control. There is nowhere for us to retain it.
 
-The data below exists **only on your device**. You control how long it is kept; it remains until you delete it:
+The data below is stored **on your device**. You control how long it is kept; it remains until you delete it. (Most of it also has an Android Auto Backup copy in your own Google account — see the end of this section and Section 5.)
 
 | Data | Where retained | Retention period | How to delete |
 |------|---------------|------------------|---------------|
-| Favorites and saved routes | Local `SharedPreferences` | Until you delete them | Delete individually in-app, or uninstall |
+| Favorite locations | Local `SharedPreferences` | Until you delete them | Delete individually in-app, or uninstall |
+| Saved routes | Local database `flysp.db` | Until you delete them | Delete individually in-app, or uninstall |
 | Search history (max 10 entries) | Local `SharedPreferences` | Until you clear it | Clear search history in-app, or uninstall |
 | Simulation records | Local `SharedPreferences` | Until you delete them | Delete from the simulation history list in-app, or uninstall |
 | App preferences (language, toggles) | Local `SharedPreferences` | Until you reset them | System Settings → Apps → FlySP → Clear data, or uninstall |
 | Purchase status and `purchaseToken` | Android Keystore (encrypted) | Until you uninstall | Uninstall |
 
-**Uninstalling the App deletes all of the above.** Because we never held this data, we cannot recover it after deletion, and you do not need to send us a deletion request.
+**Uninstalling the App deletes all of the above from the device.** Because we never held this data, we cannot recover it after deletion, and you do not need to send us a deletion request.
+
+**The backup in your Google account is the exception.** The items above that live in `SharedPreferences` and `flysp.db` (favorite locations, saved routes, categories, search history, simulation records, app preferences) are also copied to your own Google account by Android Auto Backup (see Section 5). That copy **does not disappear when you uninstall the App** — that is exactly its purpose: to bring your data back when you reinstall or switch devices. It stays in your Google account until you delete it; we can neither read it nor delete it for you.
+
+How to delete that backup (all of this happens outside the App, directly with Google):
+
+| Goal | Path |
+|------|------|
+| Delete an existing backup | Google One app → Storage → Device backups → pick the device → (pick this app's data, or the whole backup) → Delete |
+| Stop future uploads | System Settings → Google → Backup → turn off "Backup by Google One" / app data backup |
+
+If you want nothing left either on the device or in the backup: turn backup off and delete the existing backup in system settings first, then uninstall the App.
 
 Location data (see 2.1) is **not retained**: it is queried once when you tap "My Location", shown on screen, and never written to storage.
 
@@ -253,6 +286,7 @@ Since the App **does not store personal data on any server**, all data lives on 
 - Deleting individual favorites / clearing search history in-app
 - Clearing app data in system settings
 - Uninstalling the App
+- Deleting the Android Auto Backup copy in your Google account (steps in Section 6)
 
 ### 9. Permissions Explained
 
