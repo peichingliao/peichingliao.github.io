@@ -8,7 +8,7 @@ title: FlySP Privacy Policy
 # FlySP — 隱私權政策 / Privacy Policy
 
 **生效日 / Effective Date:** 2026-04-18
-**最後更新 / Last Updated:** 2026-09-18
+**最後更新 / Last Updated:** 2026-10-07
 
 ---
 
@@ -33,7 +33,7 @@ FlySP（以下簡稱「本應用程式」）是一款提供 GPS 位置模擬功�
 - **用途**：顯示於您的「最愛」清單
 
 #### 2.3 搜尋歷史（本機儲存）
-- **內容**：您在應用內搜尋的文字關鍵字（最多 10 筆）
+- **內容**：您在應用內搜尋的文字關鍵字（最多 20 筆）；若該筆來自「從明信片截圖找地點」，另存當時從圖片辨識出的地點名稱、地區與距離，讓您之後點選該筆紀錄時能重新搜尋
 - **儲存位置**：本機 `SharedPreferences`；同樣會納入 Android Auto Backup（見第 5 節）
 - **用途**：提供搜尋建議
 
@@ -54,6 +54,13 @@ FlySP（以下簡稱「本應用程式」）是一款提供 GPS 位置模擬功�
 - **何時發生**：僅在您於 App 內主動開啟「步數同步」並授權時
 - **刪除方式**：於 Health Connect App 內刪除該筆資料，或撤銷本 App 的授權
 
+#### 2.7 圖片（從明信片截圖找地點）
+- **何時發生**：僅在您主動於搜尋頁點選「從明信片截圖找地點」並從相簿選擇一張圖片時
+- **處理方式**：圖片中的文字由 Google ML Kit **在您的裝置上**辨識，**圖片本身不會上傳**到任何伺服器
+- **傳送的內容**：僅將辨識出的地點名稱與地區文字送往地點搜尋服務（Photon、Nominatim），與您手動輸入搜尋相同
+- **保留**：圖片在辨識完成後即從本應用程式的暫存空間刪除，不另外保存；辨識出的文字依第 2.3 節保存在搜尋歷史中
+- **權限**：使用系統內建的圖片選擇器，本應用程式不需要、也未取得讀取相簿的權限
+
 ### 3. 第三方服務
 
 | 服務 | 用途 | 隱私權政策連結 |
@@ -65,6 +72,8 @@ FlySP（以下簡稱「本應用程式」）是一款提供 GPS 位置模擬功�
 | OpenStreetMap Tiles | 地圖圖磚 | https://operations.osmfoundation.org/policies/tiles |
 | Photon (komoot) | 位置搜尋與地名反查 | https://photon.komoot.io |
 | Health Connect (Google) | 寫入模擬產生的步數（僅在您開啟步數同步時） | https://policies.google.com/privacy |
+| Google ML Kit 文字辨識 | 在裝置上辨識明信片截圖中的文字（圖片不上傳）；Google Play 服務可能會傳送裝置資訊與效能數據給 Google，詳見右方連結 | https://developers.google.com/ml-kit/android-data-disclosure |
+| Google 地圖 | 僅在您於找不到地點時點選「在 Google 地圖搜尋」：開啟 Google 地圖並帶入地點文字 | https://policies.google.com/privacy |
 
 ### 4. 我們「不」做的事
 
@@ -96,7 +105,8 @@ FlySP（以下簡稱「本應用程式」）是一款提供 GPS 位置模擬功�
 |---------|---------|---------|---------|
 | 最愛位置 | 本機 `SharedPreferences` | 直到您刪除 | App 內逐筆刪除，或解除安裝 |
 | 收藏路徑 | 本機資料庫 `flysp.db` | 直到您刪除 | App 內逐筆刪除，或解除安裝 |
-| 搜尋歷史（最多 10 筆） | 本機 `SharedPreferences` | 直到您清除 | App 內清除搜尋歷史，或解除安裝 |
+| 搜尋歷史（最多 20 筆，含明信片辨識出的地點文字） | 本機 `SharedPreferences` | 直到您清除 | App 內清除搜尋歷史，或解除安裝 |
+| 明信片截圖 | 辨識期間的暫存空間 | 辨識完成即刪除 | 不需要（不保存） |
 | 模擬紀錄 | 本機 `SharedPreferences` | 直到您刪除 | App 內於模擬歷史清單刪除，或解除安裝 |
 | App 偏好設定（語言、功能開關） | 本機 `SharedPreferences` | 直到您重設 | 系統設定 → 應用程式 → FlySP → 清除資料，或解除安裝 |
 | 購買狀態與 `purchaseToken` | Android Keystore（加密） | 直到您解除安裝 | 解除安裝 |
@@ -185,7 +195,7 @@ By using the App, you agree to this Privacy Policy.
 - **Purpose**: Display your "Favorites" list
 
 #### 2.3 Search History (on your device)
-- **Contents**: Your search keywords (up to 10 entries)
+- **Contents**: Your search keywords (up to 20 entries); for entries that came from "Find place from a postcard screenshot", also the place name, area and distance recognized from the image, so tapping the entry later can repeat the search
 - **Where stored**: Device-local `SharedPreferences`; also included in Android Auto Backup (see Section 5)
 - **Purpose**: Provide search suggestions
 
@@ -206,6 +216,13 @@ By using the App, you agree to this Privacy Policy.
 - **When**: only when you enable step sync in-app and grant permission
 - **How to delete**: delete the entries in the Health Connect app, or revoke the App's permission
 
+#### 2.7 Images (Find place from a postcard screenshot)
+- **When**: only when you tap "Find place from a postcard screenshot" on the search page and pick an image from your gallery
+- **How it's processed**: the text in the image is recognized by Google ML Kit **on your device**; **the image itself is never uploaded** to any server
+- **What is sent**: only the recognized place name and area text is sent to the place search services (Photon, Nominatim), the same as a search you type yourself
+- **Retention**: the image is deleted from the App's temporary storage once recognition finishes and is not kept; the recognized text is kept in your search history as described in Section 2.3
+- **Permissions**: the App uses the system image picker and does not need, or hold, permission to read your photo library
+
 ### 3. Third-Party Services
 
 | Service | Purpose | Privacy Policy |
@@ -217,6 +234,8 @@ By using the App, you agree to this Privacy Policy.
 | OpenStreetMap Tiles | Map tiles | https://operations.osmfoundation.org/policies/tiles |
 | Photon (komoot) | Location search and reverse geocoding | https://photon.komoot.io |
 | Health Connect (Google) | Writing simulated step counts (only when you enable step sync) | https://policies.google.com/privacy |
+| Google ML Kit Text Recognition | On-device recognition of text in postcard screenshots (images are not uploaded); Google Play services may send device information and performance metrics to Google, see the link | https://developers.google.com/ml-kit/android-data-disclosure |
+| Google Maps | Only when you tap "Search in Google Maps" after a place isn't found: opens Google Maps with the place text | https://policies.google.com/privacy |
 
 ### 4. What We Do NOT Do
 
@@ -248,7 +267,8 @@ The data below is stored **on your device**. You control how long it is kept; it
 |------|---------------|------------------|---------------|
 | Favorite locations | Local `SharedPreferences` | Until you delete them | Delete individually in-app, or uninstall |
 | Saved routes | Local database `flysp.db` | Until you delete them | Delete individually in-app, or uninstall |
-| Search history (max 10 entries) | Local `SharedPreferences` | Until you clear it | Clear search history in-app, or uninstall |
+| Search history (max 20 entries, incl. place text recognized from postcards) | Local `SharedPreferences` | Until you clear it | Clear search history in-app, or uninstall |
+| Postcard screenshots | Temporary storage during recognition | Deleted once recognition finishes | Not needed (not kept) |
 | Simulation records | Local `SharedPreferences` | Until you delete them | Delete from the simulation history list in-app, or uninstall |
 | App preferences (language, toggles) | Local `SharedPreferences` | Until you reset them | System Settings → Apps → FlySP → Clear data, or uninstall |
 | Purchase status and `purchaseToken` | Android Keystore (encrypted) | Until you uninstall | Uninstall |
