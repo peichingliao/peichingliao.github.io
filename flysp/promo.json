@@ -1,5 +1,25 @@
 {
   "enabled": true,
+  "disclosure": "酷澎合作夥伴推廣，購買後開發者會獲得部分佣金",
+  "banners": [
+    {
+      "image": "https://peichingliao.github.io/flysp/sponsor-banner.png",
+      "link": "https://portaly.cc/pcliao",
+      "alt": "喜歡 FlySP 嗎？請開發者喝杯咖啡"
+    },
+    {
+      "image": "https://image8.coupangcdn.com/image/affiliate/banner/1c49d922db355ac27b6d46f9c6e6aed9@2x.jpg",
+      "link": "https://coupa.ng/crdcon",
+      "alt": "JOSIC 高級24骨黑膠加大全自動傘 55 x 105cm",
+      "style": "product"
+    },
+    {
+      "image": "https://static.coupangcdn.com/image/affiliate/banner/da6d6d4a9c796b5de4052d3241612153@2x.jpg",
+      "link": "https://coupa.ng/crdcuJ",
+      "alt": "KOLKO 極簡主義前開登機箱 3066-S",
+      "style": "product"
+    }
+  ],
   "banner": {
     "image": "https://peichingliao.github.io/flysp/sponsor-banner.png",
     "link": "https://portaly.cc/pcliao",
