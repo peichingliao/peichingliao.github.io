@@ -8,7 +8,7 @@ title: FlySP Privacy Policy
 # FlySP — 隱私權政策 / Privacy Policy
 
 **生效日 / Effective Date:** 2026-04-18
-**最後更新 / Last Updated:** 2026-10-07
+**最後更新 / Last Updated:** 2026-11-14
 
 ---
 
@@ -74,6 +74,7 @@ FlySP（以下簡稱「本應用程式」）是一款提供 GPS 位置模擬功�
 | Health Connect (Google) | 寫入模擬產生的步數（僅在您開啟步數同步時） | https://policies.google.com/privacy |
 | Google ML Kit 文字辨識 | 在裝置上辨識明信片截圖中的文字（圖片不上傳）；Google Play 服務可能會傳送裝置資訊與效能數據給 Google，詳見右方連結 | https://developers.google.com/ml-kit/android-data-disclosure |
 | Google 地圖 | 僅在您於找不到地點時點選「在 Google 地圖搜尋」：開啟 Google 地圖並帶入地點文字 | https://policies.google.com/privacy |
+| GitHub Pages | 僅 iOS 版：讀取推廣橫幅與贊助連結的設定檔和圖片（不傳送任何個人資料；GitHub 會看到連線的 IP 位址）。點選橫幅或贊助連結時，會以瀏覽器開啟該網站，之後適用該網站的隱私權政策 | https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement |
 
 ### 4. 我們「不」做的事
 
@@ -236,6 +237,7 @@ By using the App, you agree to this Privacy Policy.
 | Health Connect (Google) | Writing simulated step counts (only when you enable step sync) | https://policies.google.com/privacy |
 | Google ML Kit Text Recognition | On-device recognition of text in postcard screenshots (images are not uploaded); Google Play services may send device information and performance metrics to Google, see the link | https://developers.google.com/ml-kit/android-data-disclosure |
 | Google Maps | Only when you tap "Search in Google Maps" after a place isn't found: opens Google Maps with the place text | https://policies.google.com/privacy |
+| GitHub Pages | iOS only: loads the settings file and image for the promo banner and sponsor link (no personal data is sent; GitHub sees the connecting IP address). Tapping the banner or sponsor link opens that website in your browser, where its own privacy policy applies | https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement |
 
 ### 4. What We Do NOT Do
 

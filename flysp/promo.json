@@ -1,0 +1,9 @@
+{
+  "enabled": true,
+  "banner": {
+    "image": "https://peichingliao.github.io/flysp/sponsor-banner.png",
+    "link": "https://portaly.cc/pcliao",
+    "alt": "喜歡 FlySP 嗎？請開發者喝杯咖啡"
+  },
+  "sponsorUrl": "https://portaly.cc/pcliao"
+}
